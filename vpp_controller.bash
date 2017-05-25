@@ -104,6 +104,17 @@ iptables -I INPUT -j ACCEPT
 
 
 
+# The names of the honeycomb agents should be the same with the hostname of the host that they were running
+# For the hugepages follow the steps here https://access.redhat.com/solutions/36741 
+# Also we should delete all the existing networks of the neutron (neutron port-list output should be empty) ,delete the ovs bridges 
+# http://superuser.openstack.org/articles/open-daylight-integration-with-openstack-a-tutorial/
+# create the neutron networks again 
+# Possible bug of vpp-odl it takes too long to create the first internal subnet
+# Also to spin up a VM you should use a metatdata for the flavor related to hugepages like this:
+# openstack flavor set m1.large --property hw:mem_page_size=large (maybe we should increase the RAM of the flavor to 1GB)
+# We could execute ps -ef | grep qemu    to the compute node to see if the VM has acces to hugepages of the host """" mempath""""
+
+
 
 
 
